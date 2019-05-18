@@ -10,7 +10,7 @@ from lib.sed import sed
 
 print('Welcome, the installation of the detection system will settle')
 
-if os.environ.has_key('SUDO_USER'):
+if os.environ['SUDO_USER'] in os.environ:
     user = os.environ['SUDO_USER']
 else:
     sys.exit('The setup script has not launch with sudo commands')
