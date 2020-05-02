@@ -4,8 +4,8 @@ How to build a home surveillance system with a RaspberryPI, a motion sensor, a c
 
 ### How it works
 
-When a movement is detected, the application records a video that is sent to your phone by the bot
-Once installed, the monitoring system is managed from your smartphone with the bot's commands.
+When a movement is detected, the application records a video that is sent to your phone by the bot.  
+Once installed, the monitoring system is managed from your smartphone with the bot's commands.  
 The system is started by a systemd service activated at boot time
 
 ### Prerequisites
@@ -48,7 +48,7 @@ make install
 
 * By default, the duration of the video is set to 60s. If you want change this, you need to modify the VIDEO_TIME constant in `lib/config.py`    
 
-* It's possible to add other commands to the bot in `app.py` with the decorator ! @bot.handler()
+* It's possible to add other commands to the bot in `app.py` with the decorator @bot.handler()
 ```
 @bot.handler("/<cmd>")
 def func_cmd():
