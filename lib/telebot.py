@@ -43,17 +43,17 @@ class Telebot(telepot.Bot):
     def is_listen(self, status):
         self._islisten = status
 
-    def handler(self, rule):
+    def handler(self, cmd):
         """
         Decorator to create the bot commands
         Add commands as a function in a dictionary
 
-        :param rule: The rule this handle will created
+        :param cmd: the command name
         :return decorator:
         """
 
         def decorator(func):
-            self._handle[rule].append(func)
+            self._handle[cmd].append(func)
             return func
 
         return decorator
@@ -72,7 +72,16 @@ class Telebot(telepot.Bot):
             return 0
         return 1
 
-    def send_message(self, msg):
+    def sendPhoto(self, file, msg):
+        """
+        Method for send photo
+        :param file: photo to send
+        :param msg:
+        :return:
+        """
+        super().sendPhoto(self.chat_id, photo=open(file, 'rb'), caption=msg)
+
+    def sendMessage(self, msg):
         """
 
         :param msg:
