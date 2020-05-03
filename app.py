@@ -52,12 +52,13 @@ def on_photo():
     bot.sendPhoto(camera.take_photo(), "photo")
 
 
-@bot.handler("/video")
-def on_photo():
+@bot.handler("/video", time)
+def on_video(time):
     """
     command /video: take a video
     :return: file format .mp4
     """
+    bot.sendMessage(time)
     bot.sendVideo(camera.start_recording(), "video")
 
 
