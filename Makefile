@@ -13,6 +13,8 @@ SERVICE_ABSPATH = ${CURPWD}/${SERVICE}
 LINK_PATH = /etc/systemd/system/${SERVICE_NAME}
 DATA = testsuite/data.raw
 
+TOKEN_ID=$$(grep TOKEN_ID lib/config.py | awk ' {print $$3}')
+
 SHELL := /bin/bash
 
 help:
@@ -28,7 +30,7 @@ text-install:
 	echo "-------------------------------------------------"; \
 
 
-install: text-install install-deps build-service
+install: text-install check_token_id install-deps test build-service
 
 build-service:
 	@echo -e "\n--- Build the service ---\n"; \
@@ -47,6 +49,13 @@ install-deps:
 	sudo apt-get -y install python3 python3-pip gpac; \
 	echo -e "\n --- Requirements installation ---\n"; \
 	pip3 install -r requirements.txt; \
+
+check_token_id:
+	@if test ${TOKEN_ID}x = "Your token_id"x; then \
+	  	echo "Your token_id isn't define in lib/config"; \
+	  	echo "Please set your token_id before launch install"; \
+	  	exit; \
+	fi; \
 
 test:
 	@sudo systemctl stop ${SERVICE_NAME}; \
