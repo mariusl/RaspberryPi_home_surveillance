@@ -49,7 +49,9 @@ install-deps:
 	pip3 install -r requirements.txt; \
 
 test:
-	@python3 -m unittest testsuite/*_test.py; \
+	@sudo systemctl stop ${SERVICE_NAME}; \
+	python3 -m unittest testsuite/*_test.py; \
+	sudo systemctl start ${SERVICE_NAME}; \
 
 clean: clean-deps
 	@-echo -e "\n--- Remove service --- "; \
