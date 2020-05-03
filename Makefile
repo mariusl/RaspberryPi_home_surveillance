@@ -11,6 +11,7 @@ SERVICE_TEMPLATE = etc/${SERVICE_NAME}.template
 
 SERVICE_ABSPATH = ${CURPWD}/${SERVICE}
 LINK_PATH = /etc/systemd/system/${SERVICE_NAME}
+DATA = testsuite/data.raw
 
 SHELL := /bin/bash
 
@@ -48,15 +49,13 @@ install-deps:
 	pip3 install -r requirements.txt; \
 
 test:
-	@sudo systemctl stop ${SERVICE_NAME}; \
-	python3 -m unittest testsuite/*_test.py; \
-	sudo systemctl start ${SERVICE_NAME}; \
+	@python3 -m unittest testsuite/*_test.py; \
 
 clean: clean-deps
 	@-echo -e "\n--- Remove service --- "; \
 	sudo systemctl stop ${SERVICE_NAME}; \
 	sudo systemctl disable ${LINK_PATH}; \
-	sudo rm ${LINK_PATH} ${SERVICE}; \
+	sudo rm ${LINK_PATH} ${SERVICE} ${DATA}; \
 	echo -e "--- done --\n "; \
 
 clean-deps:
