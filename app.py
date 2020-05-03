@@ -52,6 +52,15 @@ def on_photo():
     bot.sendPhoto(camera.take_photo(), "photo")
 
 
+@bot.handler("/video")
+def on_photo():
+    """
+    command /video: take a video
+    :return: file format .mp4
+    """
+    bot.sendVideo(camera.start_recording(), "video")
+
+
 @bot.handler("/help")
 def on_help():
     """
@@ -74,7 +83,7 @@ def on_clean():
     command /clean: remove file in REGISTRATION_FOLDER
     :return: function
     """
-    return camera.purge_records()
+    bot.sendMessage(camera.purge_records())
 
 
 print('I am listening ...')

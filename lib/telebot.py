@@ -53,6 +53,7 @@ class Telebot(telepot.Bot):
         """
 
         def decorator(func):
+            print(cmd)
             self._handle[cmd].append(func)
             return func
 
@@ -89,15 +90,16 @@ class Telebot(telepot.Bot):
         """
         super().sendMessage(self.chat_id, msg)
 
-    def send_video(self, video):
+    def sendVideo(self, video, msg):
         """
         Send the video if there are no errors in the recording, otherwise send the error message.
 
         :param video: a dictionary containing the name of the video,
                       the return code of the recording
                       and the error message if recording fail
+        :param msg:
         """
         if video["return_code"] == 0:
-            self.sendVideo(self.chat_id, video=open(video["name"], 'rb'), caption='Motion Detected')
+            super().sendVideo(self.chat_id, video=open(video["name"], 'rb'), caption=msg)
         else:
-            self.sendMessage(self.chat_id, video["return_code"])
+            super().sendMessage(self.chat_id, video["return_code"])
