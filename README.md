@@ -22,7 +22,6 @@ The system is started by a systemd service activated at boot time
 ## Setting up the camera hardware
 ```
 sudo raspig-config
-
 ```
 Use the cursor keys to select and open Interfacing Options, and then select Camera and follow the prompt to enable the camera.  
 Upon exiting `raspi-config`, it will ask to reboot.
