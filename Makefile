@@ -30,7 +30,7 @@ text-install:
 	echo "-------------------------------------------------"; \
 
 
-install: text-install check_token_id install-deps test build-service
+install: text-install check_token_id install-deps build-service test
 
 build-service:
 	@echo -e "\n--- Build the service ---\n"; \
