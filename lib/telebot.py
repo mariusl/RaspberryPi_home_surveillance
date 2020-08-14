@@ -85,7 +85,7 @@ class Telebot(telepot.Bot):
         :param incoming_chat_id: the incoming chat id
         :return: boolean
         """
-        return bool(self.chat_id == incoming_chat_id)
+        return bool(int(self.chat_id) == int(incoming_chat_id))
 
     def _postreceive(self, msg):
         """
